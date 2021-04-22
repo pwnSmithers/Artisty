@@ -1,2 +1,2 @@
 # Artisty
-Browse artists on a GraphQl API
+Browse artists on a GraphQl API.
