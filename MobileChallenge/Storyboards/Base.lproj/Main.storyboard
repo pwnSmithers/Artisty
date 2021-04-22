@@ -28,20 +28,93 @@
         <!--Artists-->
         <scene sceneID="X2m-bt-nH4">
             <objects>
-                <viewController title="Artists" id="4IU-1d-vCF" sceneMemberID="viewController">
+                <viewController title="Artists" id="4IU-1d-vCF" customClass="ListArtistsViewController" customModule="MobileChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="goG-cy-cXM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XoS-bE-NWr">
+                                <rect key="frame" x="0.0" y="134" width="414" height="679"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListArtistTableViewCell" rowHeight="66" id="6O7-uB-2sL" customClass="ListArtistTableViewCell" customModule="MobileChallenge" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6O7-uB-2sL" id="4Dr-ps-0Tb">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kGk-l2-2yd">
+                                                    <rect key="frame" x="20" y="11" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="WZj-ar-FLU"/>
+                                                        <constraint firstAttribute="height" constant="44" id="nj8-H6-yxG"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Mayer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvZ-kC-DHY">
+                                                    <rect key="frame" x="72" y="11" width="322" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RvZ-kC-DHY" firstAttribute="leading" secondItem="kGk-l2-2yd" secondAttribute="trailing" constant="8" symbolic="YES" id="7sE-r9-y9B"/>
+                                                <constraint firstItem="kGk-l2-2yd" firstAttribute="top" secondItem="4Dr-ps-0Tb" secondAttribute="topMargin" id="FQB-gK-gUD"/>
+                                                <constraint firstItem="kGk-l2-2yd" firstAttribute="leading" secondItem="4Dr-ps-0Tb" secondAttribute="leadingMargin" id="W75-Cx-2S0"/>
+                                                <constraint firstItem="RvZ-kC-DHY" firstAttribute="trailing" secondItem="4Dr-ps-0Tb" secondAttribute="trailingMargin" id="e11-Bn-hdR"/>
+                                                <constraint firstItem="kGk-l2-2yd" firstAttribute="bottom" secondItem="RvZ-kC-DHY" secondAttribute="bottom" id="h3w-nd-fyD"/>
+                                                <constraint firstItem="kGk-l2-2yd" firstAttribute="top" secondItem="RvZ-kC-DHY" secondAttribute="top" id="vGj-PP-Fwm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="artistImageView" destination="kGk-l2-2yd" id="VKf-mm-0ho"/>
+                                            <outlet property="artistNameLabel" destination="RvZ-kC-DHY" id="x7X-Kr-iWk"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pnX-5l-v5h">
+                                <rect key="frame" x="0.0" y="90" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="XcZ-5G-Z2t"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artists" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSn-3i-7bi">
+                                <rect key="frame" x="99" y="55" width="220" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="oe8-sS-mkt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="XoS-bE-NWr" firstAttribute="leading" secondItem="oe8-sS-mkt" secondAttribute="leading" id="E54-Ii-MiY"/>
+                            <constraint firstItem="pnX-5l-v5h" firstAttribute="top" secondItem="oe8-sS-mkt" secondAttribute="top" constant="46" id="IlG-HU-yh7"/>
+                            <constraint firstItem="pnX-5l-v5h" firstAttribute="top" secondItem="dSn-3i-7bi" secondAttribute="bottom" constant="14" id="J81-Kk-d3e"/>
+                            <constraint firstItem="XoS-bE-NWr" firstAttribute="top" secondItem="pnX-5l-v5h" secondAttribute="bottom" id="Rq5-xn-Y29"/>
+                            <constraint firstItem="XoS-bE-NWr" firstAttribute="bottom" secondItem="oe8-sS-mkt" secondAttribute="bottom" id="aem-Br-E58"/>
+                            <constraint firstItem="XoS-bE-NWr" firstAttribute="trailing" secondItem="oe8-sS-mkt" secondAttribute="trailing" id="apT-pS-Igp"/>
+                            <constraint firstItem="pnX-5l-v5h" firstAttribute="leading" secondItem="oe8-sS-mkt" secondAttribute="leading" id="dxC-Yq-LCv"/>
+                            <constraint firstItem="pnX-5l-v5h" firstAttribute="trailing" secondItem="oe8-sS-mkt" secondAttribute="trailing" id="gFj-nK-eow"/>
+                            <constraint firstItem="dSn-3i-7bi" firstAttribute="leading" secondItem="oe8-sS-mkt" secondAttribute="leading" constant="99" id="kGe-dE-OqJ"/>
+                            <constraint firstItem="oe8-sS-mkt" firstAttribute="trailing" secondItem="dSn-3i-7bi" secondAttribute="trailing" constant="95" id="lmS-93-3gV"/>
+                            <constraint firstItem="dSn-3i-7bi" firstAttribute="top" secondItem="oe8-sS-mkt" secondAttribute="top" constant="11" id="ooP-D0-uYx"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Artists" id="hUk-g2-tM4">
                         <imageReference key="image" image="music.mic" catalog="system" symbolScale="large" renderingMode="template"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="listArtistsTableView" destination="XoS-bE-NWr" id="dSZ-9n-5pf"/>
+                        <outlet property="searchBar" destination="pnX-5l-v5h" id="0kD-xh-Hp6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29J-ab-AnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="-144"/>
+            <point key="canvasLocation" x="343.47826086956525" y="-194.86607142857142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="N1M-9V-5Jg">
