@@ -74,6 +74,7 @@
 		7654352325F8D5C800070C3B /* MobileChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				9688363D2631BB9A00FE85AA /* ViewModels */,
 				968836392631B9CF00FE85AA /* Resources */,
 				968836382631B9C300FE85AA /* ApplicationDelegate */,
 				968836372631B9B800FE85AA /* Storyboards */,
@@ -183,6 +184,13 @@
 				7654352D25F8D5CA00070C3B /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9688363D2631BB9A00FE85AA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,7 +469,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5P662H3S28;
-				INFOPLIST_FILE = MobileChallenge/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MobileChallenge/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,7 +488,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5P662H3S28;
-				INFOPLIST_FILE = MobileChallenge/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MobileChallenge/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
