@@ -21,6 +21,7 @@
 		7654354D25F8D83E00070C3B /* ArtistsService.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 7654354C25F8D83E00070C3B /* ArtistsService.graphql */; };
 		7654355B25F8DF8500070C3B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654355925F8DF8500070C3B /* API.swift */; };
 		7654355E25F8DF9E00070C3B /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7654355825F8DF8500070C3B /* schema.json */; };
+		9688362F2631B7B700FE85AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9688362E2631B7B700FE85AA /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		7654354C25F8D83E00070C3B /* ArtistsService.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = ArtistsService.graphql; sourceTree = "<group>"; };
 		7654355825F8DF8500070C3B /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		7654355925F8DF8500070C3B /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		9688362E2631B7B700FE85AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,14 +74,15 @@
 		7654352325F8D5C800070C3B /* MobileChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				968836392631B9CF00FE85AA /* Resources */,
+				968836382631B9C300FE85AA /* ApplicationDelegate */,
+				968836372631B9B800FE85AA /* Storyboards */,
+				968836362631B9A200FE85AA /* SupportingFiles */,
+				968836352631B99700FE85AA /* Extensions */,
+				968836342631B98100FE85AA /* Configuration */,
+				968836332631B97600FE85AA /* Protocols */,
+				968836322631B96400FE85AA /* ViewContrrollers */,
 				7654354925F8D7DE00070C3B /* Network */,
-				7654352425F8D5C800070C3B /* AppDelegate.swift */,
-				7654352625F8D5C800070C3B /* SceneDelegate.swift */,
-				7654352825F8D5C800070C3B /* ViewController.swift */,
-				7654352A25F8D5C800070C3B /* Main.storyboard */,
-				7654352D25F8D5CA00070C3B /* Assets.xcassets */,
-				7654352F25F8D5CA00070C3B /* LaunchScreen.storyboard */,
-				7654353225F8D5CA00070C3B /* Info.plist */,
 			);
 			path = MobileChallenge;
 			sourceTree = "<group>";
@@ -96,6 +99,7 @@
 		7654354925F8D7DE00070C3B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9688362D2631B7A800FE85AA /* NetworkService */,
 				7654354B25F8D82A00070C3B /* ArtistsService */,
 				7654354725F8D7A600070C3B /* Core */,
 			);
@@ -108,6 +112,77 @@
 				7654354C25F8D83E00070C3B /* ArtistsService.graphql */,
 			);
 			path = ArtistsService;
+			sourceTree = "<group>";
+		};
+		9688362D2631B7A800FE85AA /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				9688362E2631B7B700FE85AA /* NetworkService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		968836322631B96400FE85AA /* ViewContrrollers */ = {
+			isa = PBXGroup;
+			children = (
+				7654352825F8D5C800070C3B /* ViewController.swift */,
+			);
+			path = ViewContrrollers;
+			sourceTree = "<group>";
+		};
+		968836332631B97600FE85AA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		968836342631B98100FE85AA /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		968836352631B99700FE85AA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		968836362631B9A200FE85AA /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7654353225F8D5CA00070C3B /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		968836372631B9B800FE85AA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7654352F25F8D5CA00070C3B /* LaunchScreen.storyboard */,
+				7654352A25F8D5C800070C3B /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		968836382631B9C300FE85AA /* ApplicationDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				7654352625F8D5C800070C3B /* SceneDelegate.swift */,
+				7654352425F8D5C800070C3B /* AppDelegate.swift */,
+			);
+			path = ApplicationDelegate;
+			sourceTree = "<group>";
+		};
+		968836392631B9CF00FE85AA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7654352D25F8D5CA00070C3B /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9688362F2631B7B700FE85AA /* NetworkService.swift in Sources */,
 				7654352925F8D5C800070C3B /* ViewController.swift in Sources */,
 				7654352525F8D5C800070C3B /* AppDelegate.swift in Sources */,
 				7654355B25F8DF8500070C3B /* API.swift in Sources */,
@@ -384,13 +460,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B6U3XM8GZP;
+				DEVELOPMENT_TEAM = 5P662H3S28;
 				INFOPLIST_FILE = MobileChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.swapcard.MobileChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bulamu.MobileChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -403,13 +479,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B6U3XM8GZP;
+				DEVELOPMENT_TEAM = 5P662H3S28;
 				INFOPLIST_FILE = MobileChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.swapcard.MobileChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bulamu.MobileChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
