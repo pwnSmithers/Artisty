@@ -13,11 +13,14 @@ class ListArtistsViewController: UIViewController {
     
     //MARK:- Properties
     var artists: ArtistsCollection = []
+    let viewModel = ListArtistsViewModel()
+    
     //MARK:- Outlets
     @IBOutlet weak var listArtistsTableView: UITableView!
-    
+    @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    //MARK:- View Lifecycle.
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -27,8 +30,10 @@ class ListArtistsViewController: UIViewController {
     fileprivate func setupView() {
         self.listArtistsTableView.delegate = self
         self.listArtistsTableView.dataSource = self
-        let viewModel = ListArtistsViewModel()
-        searchFor(artist: "The 1975", with: viewModel)
+        self.searchBar.delegate = self
+        if artists.isEmpty{
+            listArtistsTableView.isHidden = true
+        }
     }
 
 }
@@ -44,6 +49,8 @@ extension ListArtistsViewController{
             switch result {
             case .success(let artistData):
                 strongSelf.artists.append(contentsOf: artistData)
+                strongSelf.listArtistsTableView.isHidden = false
+                strongSelf.noContentLabel.isHidden = true
                 strongSelf.listArtistsTableView.reloadData()
             case .failure(let error):
                 print("Fouund an error \(error)")
@@ -54,6 +61,7 @@ extension ListArtistsViewController{
 
 extension ListArtistsViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
         let selectedArtist = artists[indexPath.row]
         if let detailsVC = storyboard?.instantiateViewController(identifier: "ArtistDetail") as? ArtistDetailViewController {
             detailsVC.artist = selectedArtist
@@ -63,6 +71,15 @@ extension ListArtistsViewController: UITableViewDelegate{
 }
 
 extension ListArtistsViewController: UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if artists.isEmpty{
+            return 0
+        } else {
+            return 1
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return artists.count
     }
@@ -74,5 +91,28 @@ extension ListArtistsViewController: UITableViewDataSource{
         cell.setupCell(artist: artists[indexPath.row])
         return cell
     }
-    
 }
+
+//MARK: SearchBar Config
+extension ListArtistsViewController: UISearchBarDelegate{
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //remove any previously searched data.
+        if !self.artists.isEmpty{
+            self.artists.removeAll()
+        }
+
+        if searchBar.text != ""{
+            if let searchText = searchBar.text{
+                searchBar.resignFirstResponder()
+                searchFor(artist: searchText, with: viewModel)
+            }
+        } else {
+            let alert = UIAlertController.userEnteredEmptySearchString {}
+            self.present(alert, animated: true, completion: nil)
+        }
+       
+    }
+
+}
+
