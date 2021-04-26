@@ -7,6 +7,8 @@
 
 import UIKit
 
+typealias Artist = ArtistsQuery.Data.Search.Artist.Node?
+
 class ListArtistTableViewCell: UITableViewCell {
     
     //MARK:- Properties
@@ -19,15 +21,7 @@ class ListArtistTableViewCell: UITableViewCell {
     @IBOutlet weak var artistImageView: UIImageView!
     
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func setupCell(artist: Artist){
+        artistNameLabel.text = artist?.name
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
