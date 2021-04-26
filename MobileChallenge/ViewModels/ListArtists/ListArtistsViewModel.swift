@@ -22,7 +22,6 @@ class ListArtistsViewModel {
     
     typealias SearchArtistsCompletion = (SearchArtistResult) -> Void
     var didSearchForArtist: SearchArtistsCompletion?
-   // var artistArray: [ArtistsQuery.Data.Search.Artist] = []
 
     func fetchArtists(_ name: String) {
         NetworkService.shared.apollo.fetch(query: ArtistsQuery(search: name, first: 15)) { result in
