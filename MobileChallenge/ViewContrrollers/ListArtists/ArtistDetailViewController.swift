@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 enum MusicianStatus {
     case Bookmarked
@@ -18,6 +19,7 @@ class ArtistDetailViewController: UIViewController {
     var artist: Artist?
     var artistsName: String?
     var arstistsId: String?
+    var imageUrl: String?
     var artistDisambiguation: String?
     var bookmarkedMusician: Musician?
     var viewModel = ArtistDetailsViewModel()
@@ -25,6 +27,7 @@ class ArtistDetailViewController: UIViewController {
 
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var artistStatusButton: UIButton!
+    @IBOutlet weak var artistImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,21 @@ class ArtistDetailViewController: UIViewController {
     fileprivate func setupView(){
         if let artistId = arstistsId{
             artistName.text = artistsName
+            let processor = DownsamplingImageProcessor(size: artistImage.bounds.size)
+                         |> RoundCornerImageProcessor(cornerRadius: 20)
+            if let imageUrl = imageUrl {
+                let url = URL(string: imageUrl)
+                artistImage.kf.setImage(
+                    with: url,
+                    placeholder: UIImage(named: "placeholder"),
+                    options: [
+                        .processor(processor),
+                        .scaleFactor(UIScreen.main.scale),
+                        .transition(.fade(1)),
+                        .cacheOriginalImage
+                    ])
+            }
+           
             let isArtistBookmarked = viewModel.check(artistId: artistId)
             if isArtistBookmarked{
                 artistStatusButton.setTitle("Delete Bookmark", for: .normal)
