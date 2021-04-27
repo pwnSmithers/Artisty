@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias ArtistsCollection = [ArtistsQuery.Data.Search.Artist.Node?]
+typealias ArtistsCollection = [ArtistsQuery.Data.Search.Artist.Node ]
 
 class ListArtistsViewController: UIViewController {
     
@@ -48,7 +48,11 @@ extension ListArtistsViewController{
             }
             switch result {
             case .success(let artistData):
-                strongSelf.artists.append(contentsOf: artistData)
+                artistData.forEach { (artist) in
+                    if let artistR = artist{
+                        strongSelf.artists.append(artistR)
+                    }
+                }
                 strongSelf.listArtistsTableView.isHidden = false
                 strongSelf.noContentLabel.isHidden = true
                 strongSelf.listArtistsTableView.reloadData()
@@ -64,7 +68,9 @@ extension ListArtistsViewController: UITableViewDelegate{
         searchBar.resignFirstResponder()
         let selectedArtist = artists[indexPath.row]
         if let detailsVC = storyboard?.instantiateViewController(identifier: "ArtistDetail") as? ArtistDetailViewController {
-            detailsVC.artist = selectedArtist
+            detailsVC.arstistsId = selectedArtist.id
+            detailsVC.artistsName = selectedArtist.name
+            detailsVC.artistDisambiguation = selectedArtist.disambiguation
             navigationController?.pushViewController(detailsVC, animated: true)
         }
     }
@@ -108,7 +114,7 @@ extension ListArtistsViewController: UISearchBarDelegate{
                 searchFor(artist: searchText, with: viewModel)
             }
         } else {
-            let alert = UIAlertController.userEnteredEmptySearchString {}
+            let alert = UIAlertController.notifyUser(title: "Error", message: "Please enter an artist's name") {}
             self.present(alert, animated: true, completion: nil)
         }
        
