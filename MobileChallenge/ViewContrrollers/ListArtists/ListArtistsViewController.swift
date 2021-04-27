@@ -20,6 +20,7 @@ class ListArtistsViewController: UIViewController {
     @IBOutlet weak var listArtistsTableView: UITableView!
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK:- View Lifecycle.
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class ListArtistsViewController: UIViewController {
         self.listArtistsTableView.delegate = self
         self.listArtistsTableView.dataSource = self
         self.searchBar.delegate = self
+        activityIndicator.isHidden = true
         if artists.isEmpty{
             listArtistsTableView.isHidden = true
         }
@@ -49,11 +51,16 @@ class ListArtistsViewController: UIViewController {
 //MARK:- Fetch artists
 extension ListArtistsViewController{
     private func searchFor(artist name: String, with viewModel: ListArtistsViewModel) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         viewModel.fetchArtists(name)
         viewModel.didSearchForArtist = {[weak self] (result) in
+            
             guard let strongSelf = self else {
                 return
             }
+            strongSelf.activityIndicator.isHidden = true
+            strongSelf.activityIndicator.stopAnimating()
             switch result {
             case .success(let artistData):
                 artistData.forEach { (artist) in
