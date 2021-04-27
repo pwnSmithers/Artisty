@@ -27,6 +27,13 @@
 		9688362F2631B7B700FE85AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9688362E2631B7B700FE85AA /* NetworkService.swift */; };
 		96AC1B922631C0BE002CBE10 /* ListArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC1B912631C0BE002CBE10 /* ListArtistsViewController.swift */; };
 		96AC1B962631C0E3002CBE10 /* ListArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC1B952631C0E3002CBE10 /* ListArtistTableViewCell.swift */; };
+		96C254D626373C520008200F /* Musicians.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 96C254D426373C520008200F /* Musicians.xcdatamodeld */; };
+		96C254DA26373CEA0008200F /* Musician+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C254D826373CEA0008200F /* Musician+CoreDataClass.swift */; };
+		96C254DB26373CEA0008200F /* Musician+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C254D926373CEA0008200F /* Musician+CoreDataProperties.swift */; };
+		96C254E02637403C0008200F /* ArtistDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C254DF2637403C0008200F /* ArtistDetailsViewModel.swift */; };
+		96C254E42637495A0008200F /* BookmarkedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C254E32637495A0008200F /* BookmarkedViewController.swift */; };
+		96C254E826374B6A0008200F /* BookmarkedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C254E726374B6A0008200F /* BookmarkedViewModel.swift */; };
+		96C254EE26374FD10008200F /* BookmarkedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C254ED26374FD10008200F /* BookmarkedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +54,13 @@
 		9688362E2631B7B700FE85AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		96AC1B912631C0BE002CBE10 /* ListArtistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListArtistsViewController.swift; sourceTree = "<group>"; };
 		96AC1B952631C0E3002CBE10 /* ListArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListArtistTableViewCell.swift; sourceTree = "<group>"; };
+		96C254D526373C520008200F /* Musicians.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Musicians.xcdatamodel; sourceTree = "<group>"; };
+		96C254D826373CEA0008200F /* Musician+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Musician+CoreDataClass.swift"; sourceTree = "<group>"; };
+		96C254D926373CEA0008200F /* Musician+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Musician+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		96C254DF2637403C0008200F /* ArtistDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailsViewModel.swift; sourceTree = "<group>"; };
+		96C254E32637495A0008200F /* BookmarkedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedViewController.swift; sourceTree = "<group>"; };
+		96C254E726374B6A0008200F /* BookmarkedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedViewModel.swift; sourceTree = "<group>"; };
+		96C254ED26374FD10008200F /* BookmarkedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +98,7 @@
 		7654352325F8D5C800070C3B /* MobileChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				96C254C9263738790008200F /* Model */,
 				9688363D2631BB9A00FE85AA /* ViewModels */,
 				968836392631B9CF00FE85AA /* Resources */,
 				968836382631B9C300FE85AA /* ApplicationDelegate */,
@@ -202,6 +217,7 @@
 		968836392631B9CF00FE85AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				96C254C4263737520008200F /* CoreData */,
 				7654352D25F8D5CA00070C3B /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -210,6 +226,8 @@
 		9688363D2631BB9A00FE85AA /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				96C254E626374B570008200F /* Bookmarked */,
+				96C254DE2637402A0008200F /* ArtistDetails */,
 				9639169F2636A456003A16DF /* ListArtists */,
 			);
 			path = ViewModels;
@@ -228,6 +246,8 @@
 		96AC1B902631C09A002CBE10 /* Bookmark */ = {
 			isa = PBXGroup;
 			children = (
+				96C254EB26374FAE0008200F /* TableViewCells */,
+				96C254E32637495A0008200F /* BookmarkedViewController.swift */,
 			);
 			path = Bookmark;
 			sourceTree = "<group>";
@@ -236,6 +256,47 @@
 			isa = PBXGroup;
 			children = (
 				96AC1B952631C0E3002CBE10 /* ListArtistTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		96C254C4263737520008200F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				96C254D426373C520008200F /* Musicians.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		96C254C9263738790008200F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				96C254D826373CEA0008200F /* Musician+CoreDataClass.swift */,
+				96C254D926373CEA0008200F /* Musician+CoreDataProperties.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		96C254DE2637402A0008200F /* ArtistDetails */ = {
+			isa = PBXGroup;
+			children = (
+				96C254DF2637403C0008200F /* ArtistDetailsViewModel.swift */,
+			);
+			path = ArtistDetails;
+			sourceTree = "<group>";
+		};
+		96C254E626374B570008200F /* Bookmarked */ = {
+			isa = PBXGroup;
+			children = (
+				96C254E726374B6A0008200F /* BookmarkedViewModel.swift */,
+			);
+			path = Bookmarked;
+			sourceTree = "<group>";
+		};
+		96C254EB26374FAE0008200F /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				96C254ED26374FD10008200F /* BookmarkedTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -363,16 +424,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C254DA26373CEA0008200F /* Musician+CoreDataClass.swift in Sources */,
 				9688362F2631B7B700FE85AA /* NetworkService.swift in Sources */,
 				963916CC2636F364003A16DF /* ArtistDetailViewController.swift in Sources */,
 				7654352525F8D5C800070C3B /* AppDelegate.swift in Sources */,
+				96C254E02637403C0008200F /* ArtistDetailsViewModel.swift in Sources */,
+				96C254DB26373CEA0008200F /* Musician+CoreDataProperties.swift in Sources */,
 				963916A12636A473003A16DF /* ListArtistsViewModel.swift in Sources */,
 				96AC1B962631C0E3002CBE10 /* ListArtistTableViewCell.swift in Sources */,
+				96C254EE26374FD10008200F /* BookmarkedTableViewCell.swift in Sources */,
 				7654355B25F8DF8500070C3B /* API.swift in Sources */,
 				9607FEC126372DA500F5CD3A /* UIAlertController+Extension.swift in Sources */,
+				96C254E42637495A0008200F /* BookmarkedViewController.swift in Sources */,
 				96AC1B922631C0BE002CBE10 /* ListArtistsViewController.swift in Sources */,
 				963916A42636A771003A16DF /* ArtistsSearchable.swift in Sources */,
+				96C254D626373C520008200F /* Musicians.xcdatamodeld in Sources */,
 				7654352725F8D5C800070C3B /* SceneDelegate.swift in Sources */,
+				96C254E826374B6A0008200F /* BookmarkedViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +681,19 @@
 			productName = ApolloCodegenLib;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		96C254D426373C520008200F /* Musicians.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				96C254D526373C520008200F /* Musicians.xcdatamodel */,
+			);
+			currentVersion = 96C254D526373C520008200F /* Musicians.xcdatamodel */;
+			path = Musicians.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7654351925F8D5C800070C3B /* Project object */;
 }

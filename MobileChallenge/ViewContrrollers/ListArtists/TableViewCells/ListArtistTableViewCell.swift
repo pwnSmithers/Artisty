@@ -18,10 +18,9 @@ class ListArtistTableViewCell: UITableViewCell {
     
     //MARK:- Outlets
     @IBOutlet weak var artistNameLabel: UILabel!
-    @IBOutlet weak var artistImageView: UIImageView!
-    
     
     func setupCell(artist: Artist){
+        
         artistNameLabel.text = artist?.name
     }
 }
