@@ -32,7 +32,6 @@ class ListArtistsViewModel {
                    self.didSearchForArtist?(artistResult)
                 }
             case .failure(let error):
-                //print("Error: \(error)")
                 let result: SearchArtistResult = .failure(.networkError)
                 self.didSearchForArtist?(result)
             }

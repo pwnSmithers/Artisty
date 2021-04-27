@@ -12,19 +12,16 @@ enum MusicianStatus {
     case NotBookmarked
 }
 
-enum ArtistContentSource {
-    case saved
-    case graphQl
-}
-
 class ArtistDetailViewController: UIViewController {
 
     //MARK:- Properties
     var artist: Artist?
+    var artistsName: String?
+    var arstistsId: String?
+    var artistDisambiguation: String?
     var bookmarkedMusician: Musician?
     var viewModel = ArtistDetailsViewModel()
     var musicianStatus: MusicianStatus = .NotBookmarked
-    var sourceOfData: ArtistContentSource = .graphQl
 
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var artistStatusButton: UIButton!
@@ -35,60 +32,74 @@ class ArtistDetailViewController: UIViewController {
     }
 
     fileprivate func setupView(){
-        switch sourceOfData {
-        case .graphQl:
-            if let artist = artist {
-                print("artist ID \(artist.name)")
-                artistName.text = artist.name
-                let isArtistBookmarked = viewModel.check(artist: artist)
-                if isArtistBookmarked{
-                    artistStatusButton.setTitle("Delete Bookmark", for: .normal)
-                    artistStatusButton.setImage(UIImage(systemName: "trash"), for: .normal)
-                    artistStatusButton.tintColor = UIColor.red
-                    artistStatusButton.backgroundColor = UIColor.lightGray
-                    artistStatusButton.layer.cornerRadius = 5
-                    musicianStatus = .Bookmarked
-                    artistStatusButton.addTarget(self, action: #selector(removeArtist), for: .touchUpInside)
-                } else {
-                    artistStatusButton.setTitle("Bookmark Artist", for: .normal)
-                    artistStatusButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-                    artistStatusButton.tintColor = UIColor.green
-                    artistStatusButton.backgroundColor = UIColor.lightGray
-                    artistStatusButton.layer.cornerRadius = 5
-                    musicianStatus = .NotBookmarked
-                    artistStatusButton.addTarget(self, action: #selector(bookMarkArtist), for: .touchUpInside)
-                }
-            }
-        case .saved:
-            
-            if let musician = bookmarkedMusician {
-                artistName.text = musician.name
-                
+        if let artistId = arstistsId{
+            artistName.text = artistsName
+            let isArtistBookmarked = viewModel.check(artistId: artistId)
+            if isArtistBookmarked{
+                artistStatusButton.setTitle("Delete Bookmark", for: .normal)
+                artistStatusButton.setImage(UIImage(systemName: "trash"), for: .normal)
+                artistStatusButton.tintColor = UIColor.red
+                artistStatusButton.backgroundColor = UIColor.lightGray
+                artistStatusButton.layer.cornerRadius = 5
+                musicianStatus = .Bookmarked
+                artistStatusButton.addTarget(self, action: #selector(removeArtist), for: .touchUpInside)
+            }else {
+                artistStatusButton.setTitle("Bookmark Artist", for: .normal)
+                artistStatusButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                artistStatusButton.tintColor = UIColor.green
+                artistStatusButton.backgroundColor = UIColor.lightGray
+                artistStatusButton.layer.cornerRadius = 5
+                musicianStatus = .NotBookmarked
+                artistStatusButton.addTarget(self, action: #selector(bookMarkArtist), for: .touchUpInside)
             }
         }
-      
     }
   
 }
 
 extension ArtistDetailViewController{
     @objc private func bookMarkArtist(){
-        if let artist = artist{
-            bookmark(artist: artist)
-        }
+            bookmark()
     }
     
     @objc private func removeArtist(){
-        if let artist = artist{
-            delete(artist: artist)
+            delete()
+    }
+    
+    fileprivate func bookmark(){
+        if let artistId = arstistsId, let artistName = artistsName {
+            viewModel.save(artistId: artistId, artistName: artistName, disambiguation: artistDisambiguation ?? "") { [weak self] (finished) in
+                guard let strongSelf = self else {
+                    return
+                }
+                if finished{
+                    let alert = UIAlertController.notifyUser(title: "Success", message: "You've successfully bookmarked the arttist") {
+                        strongSelf.setupView()
+                    }
+                    strongSelf.present(alert, animated: true, completion: nil)
+                }
+            }
         }
     }
     
-    fileprivate func bookmark(artist: Artist){
-        viewModel.save(artist: artist)
-    }
-    
-    fileprivate func delete(artist: Artist){
-        viewModel.delete(artist: artist)
+    fileprivate func delete(){
+        if let artistId = arstistsId, let artistName = artistsName{
+            viewModel.delete(artistId: artistId, artistName: artistName, disambiguation: artistDisambiguation ?? "") { [weak self] (deleted) in
+                guard let strongSelf = self else {
+                    return
+                }
+                if deleted{
+                    let alert = UIAlertController.notifyUser(title: "Success", message: "You've successfully unbookmarked the artist.") {
+                        strongSelf.setupView()
+                    }
+                    strongSelf.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController.notifyUser(title: "Success", message: "You've successfully unbookmarked the artist.") {
+                        strongSelf.setupView()
+                    }
+                    strongSelf.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }

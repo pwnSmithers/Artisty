@@ -16,14 +16,9 @@ class BookmarkedTableViewCell: UITableViewCell {
     //MARK:- Outlets
     @IBOutlet weak var musicianName: UILabel!
    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     //MARK:- Methods
     func setup(with artist: Musician){
-        print("The artist passed is \(artist.name)")
         musicianName.text = artist.name
     }
 

@@ -12,7 +12,6 @@ class BookmarkedViewController: UIViewController {
     var viewModel = BookmarkedViewModel()
     var bookmarkedMusicians = [Musician]() {
         didSet{
-            print("bookmarked musicians set")
             bookmarkedItemsTableView.reloadData()
         }
     }
@@ -25,6 +24,10 @@ class BookmarkedViewController: UIViewController {
     //MARK:- VIEW LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupView()
     }
     
@@ -49,8 +52,6 @@ class BookmarkedViewController: UIViewController {
                     strongSelf.bookmarkedMusicians = musicians
                     strongSelf.bookmarkedItemsTableView.reloadData()
                 }
-
-                print("Musicians \(musicians.count)")
             case .failure(let error):
                 print("Error is \(error)")
             }
@@ -62,11 +63,9 @@ extension BookmarkedViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMusician = bookmarkedMusicians[indexPath.row]
         if let detailsVC = storyboard?.instantiateViewController(identifier: "ArtistDetail") as? ArtistDetailViewController {
-            var artist: Artist?
-            artist?.name = selectedMusician.name
-            artist?.id = selectedMusician.id ?? ""
-            artist?.disambiguation = selectedMusician.disambiguation
-            detailsVC.artist = artist
+            detailsVC.artistsName = selectedMusician.name
+            detailsVC.arstistsId = selectedMusician.id
+            detailsVC.artistDisambiguation = selectedMusician.disambiguation
             navigationController?.pushViewController(detailsVC, animated: true)
         }
     }

@@ -19,13 +19,13 @@ class ArtistDetailsViewModel {
 //MARK:- CoreData methods for bookmarking.
 extension ArtistDetailsViewModel{
     
-    func check(artist: Artist) -> Bool{
+    func check(artistId: String) -> Bool{
         var artistBookmarked : Bool = false
         do {
             musicians = try context.fetch(Musician.fetchRequest())
             
             musicians.forEach { (musician) in
-                if musician.id == artist.id{
+                if musician.id == artistId{
                     artistBookmarked = true
                 }
             }
@@ -34,27 +34,38 @@ extension ArtistDetailsViewModel{
         }
         return artistBookmarked
     }
-
     
-     func save(artist: Artist){
+    func save(artistId: String,artistName: String,disambiguation: String, completion: @escaping (Bool) -> Void){
         let musician = Musician(entity: Musician.entity(), insertInto: context)
-        musician.id = artist.id
-        musician.name = artist.name
-        musician.disambiguation = artist.disambiguation
+        musician.id = artistId
+        musician.name = artistName
+        musician.disambiguation = disambiguation
         appDelegate.saveContext()
+        completion(true)
     }
     
-     func delete(artist: Artist){
-        let musician = getMusicianFrom(artist: artist)
-        context.delete(musician)
-        appDelegate.saveContext()
+    func delete(artistId: String,artistName: String,disambiguation: String , completion: @escaping (Bool) -> Void){
+        let musician = getMusicianFrom(artistId: artistId, artistName: artistName, disambiguation: disambiguation)
+        do {
+            musicians = try context.fetch(Musician.fetchRequest())
+            musicians.forEach { (savedMusician) in
+                if savedMusician.id == musician.id{
+                    context.delete(savedMusician)
+                    appDelegate.saveContext()
+                    completion(true)
+                }
+            }
+        } catch let error as NSError {
+            print("Couln't fetch \(error), \(error.userInfo)")
+            completion(false)
+        }
     }
     
-    fileprivate func getMusicianFrom(artist: Artist) -> Musician {
+    fileprivate func getMusicianFrom(artistId: String,artistName: String,disambiguation: String) -> Musician {
         let musician = Musician(entity: Musician.entity(), insertInto: context)
-        musician.id = artist.id
-        musician.name = artist.name
-        musician.disambiguation = artist.disambiguation
+        musician.id = artistId
+        musician.name = artistName
+        musician.disambiguation = disambiguation
         return musician
     }
 }
