@@ -25,7 +25,7 @@ extension ArtistDetailsViewModel{
             musicians = try context.fetch(Musician.fetchRequest())
             
             musicians.forEach { (musician) in
-                if musician.id == artist?.id{
+                if musician.id == artist.id{
                     artistBookmarked = true
                 }
             }
@@ -38,9 +38,9 @@ extension ArtistDetailsViewModel{
     
      func save(artist: Artist){
         let musician = Musician(entity: Musician.entity(), insertInto: context)
-        musician.id = artist?.id
-        musician.name = artist?.name
-        musician.disambiguation = artist?.disambiguation
+        musician.id = artist.id
+        musician.name = artist.name
+        musician.disambiguation = artist.disambiguation
         appDelegate.saveContext()
     }
     
@@ -52,9 +52,9 @@ extension ArtistDetailsViewModel{
     
     fileprivate func getMusicianFrom(artist: Artist) -> Musician {
         let musician = Musician(entity: Musician.entity(), insertInto: context)
-        musician.id = artist?.id
-        musician.name = artist?.name
-        musician.disambiguation = artist?.disambiguation
+        musician.id = artist.id
+        musician.name = artist.name
+        musician.disambiguation = artist.disambiguation
         return musician
     }
 }

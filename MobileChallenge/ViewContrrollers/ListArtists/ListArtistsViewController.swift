@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias ArtistsCollection = [ArtistsQuery.Data.Search.Artist.Node?]
+typealias ArtistsCollection = [ArtistsQuery.Data.Search.Artist.Node ]
 
 class ListArtistsViewController: UIViewController {
     
@@ -48,7 +48,12 @@ extension ListArtistsViewController{
             }
             switch result {
             case .success(let artistData):
-                strongSelf.artists.append(contentsOf: artistData)
+                artistData.forEach { (artist) in
+                    if let artistR = artist{
+                        strongSelf.artists.append(artistR)
+                    }
+                }
+                //strongSelf.artists.append(contentsOf: artistData)
                 strongSelf.listArtistsTableView.isHidden = false
                 strongSelf.noContentLabel.isHidden = true
                 strongSelf.listArtistsTableView.reloadData()

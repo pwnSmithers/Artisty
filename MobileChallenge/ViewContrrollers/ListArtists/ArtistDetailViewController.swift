@@ -38,8 +38,8 @@ class ArtistDetailViewController: UIViewController {
         switch sourceOfData {
         case .graphQl:
             if let artist = artist {
-                print("artist ID \(artist?.name)")
-                artistName.text = artist?.name
+                print("artist ID \(artist.name)")
+                artistName.text = artist.name
                 let isArtistBookmarked = viewModel.check(artist: artist)
                 if isArtistBookmarked{
                     artistStatusButton.setTitle("Delete Bookmark", for: .normal)

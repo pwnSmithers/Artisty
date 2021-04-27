@@ -62,14 +62,11 @@ extension BookmarkedViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMusician = bookmarkedMusicians[indexPath.row]
         if let detailsVC = storyboard?.instantiateViewController(identifier: "ArtistDetail") as? ArtistDetailViewController {
-            
             var artist: Artist?
-            
-            artist??.name = selectedMusician.name
-            artist??.id = selectedMusician.id ?? ""
-            artist??.disambiguation = selectedMusician.disambiguation
+            artist?.name = selectedMusician.name
+            artist?.id = selectedMusician.id ?? ""
+            artist?.disambiguation = selectedMusician.disambiguation
             detailsVC.artist = artist
-          
             navigationController?.pushViewController(detailsVC, animated: true)
         }
     }

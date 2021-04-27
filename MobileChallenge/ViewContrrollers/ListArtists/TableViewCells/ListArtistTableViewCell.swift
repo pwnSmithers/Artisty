@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias Artist = ArtistsQuery.Data.Search.Artist.Node?
+typealias Artist = ArtistsQuery.Data.Search.Artist.Node
 
 class ListArtistTableViewCell: UITableViewCell {
     
@@ -21,6 +21,6 @@ class ListArtistTableViewCell: UITableViewCell {
     
     func setupCell(artist: Artist){
         
-        artistNameLabel.text = artist?.name
+        artistNameLabel.text = artist.name
     }
 }
