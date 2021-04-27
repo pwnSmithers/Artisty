@@ -12,5 +12,20 @@ fragment ArtistBasicFragment on Artist {
   id
   name
   disambiguation
+  mediaWikiImages {
+    descriptionURL
+    user
+    size
+    width
+    height
+    canonicalTitle
+    objectName
+    descriptionHTML
+    originalDateTimeHTML
+    artistHTML
+    creditHTML
+    licenseShortName
+    licenseURL
+  }
 }
 

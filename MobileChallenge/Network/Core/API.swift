@@ -158,6 +158,7 @@ public final class ArtistsQuery: GraphQLQuery {
               GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
               GraphQLField("name", type: .scalar(String.self)),
               GraphQLField("disambiguation", type: .scalar(String.self)),
+              GraphQLField("mediaWikiImages", type: .nonNull(.list(.object(MediaWikiImage.selections)))),
             ]
           }
 
@@ -167,8 +168,8 @@ public final class ArtistsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: GraphQLID, name: String? = nil, disambiguation: String? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Artist", "id": id, "name": name, "disambiguation": disambiguation])
+          public init(id: GraphQLID, name: String? = nil, disambiguation: String? = nil, mediaWikiImages: [MediaWikiImage?]) {
+            self.init(unsafeResultMap: ["__typename": "Artist", "id": id, "name": name, "disambiguation": disambiguation, "mediaWikiImages": mediaWikiImages.map { (value: MediaWikiImage?) -> ResultMap? in value.flatMap { (value: MediaWikiImage) -> ResultMap in value.resultMap } }])
           }
 
           public var __typename: String {
@@ -210,6 +211,18 @@ public final class ArtistsQuery: GraphQLQuery {
             }
           }
 
+          /// Artist images found at MediaWiki URLs in the artist’s URL relationships.
+          /// Defaults to URL relationships with the type “image”.
+          /// This field is provided by the MediaWiki extension.
+          public var mediaWikiImages: [MediaWikiImage?] {
+            get {
+              return (resultMap["mediaWikiImages"] as! [ResultMap?]).map { (value: ResultMap?) -> MediaWikiImage? in value.flatMap { (value: ResultMap) -> MediaWikiImage in MediaWikiImage(unsafeResultMap: value) } }
+            }
+            set {
+              resultMap.updateValue(newValue.map { (value: MediaWikiImage?) -> ResultMap? in value.flatMap { (value: MediaWikiImage) -> ResultMap in value.resultMap } }, forKey: "mediaWikiImages")
+            }
+          }
+
           public var fragments: Fragments {
             get {
               return Fragments(unsafeResultMap: resultMap)
@@ -235,6 +248,179 @@ public final class ArtistsQuery: GraphQLQuery {
               }
             }
           }
+
+          public struct MediaWikiImage: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["MediaWikiImage"]
+
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("descriptionURL", type: .scalar(String.self)),
+                GraphQLField("user", type: .scalar(String.self)),
+                GraphQLField("size", type: .scalar(Int.self)),
+                GraphQLField("width", type: .scalar(Int.self)),
+                GraphQLField("height", type: .scalar(Int.self)),
+                GraphQLField("canonicalTitle", type: .scalar(String.self)),
+                GraphQLField("objectName", type: .scalar(String.self)),
+                GraphQLField("descriptionHTML", type: .scalar(String.self)),
+                GraphQLField("originalDateTimeHTML", type: .scalar(String.self)),
+                GraphQLField("artistHTML", type: .scalar(String.self)),
+                GraphQLField("creditHTML", type: .scalar(String.self)),
+                GraphQLField("licenseShortName", type: .scalar(String.self)),
+                GraphQLField("licenseURL", type: .scalar(String.self)),
+              ]
+            }
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(descriptionUrl: String? = nil, user: String? = nil, size: Int? = nil, width: Int? = nil, height: Int? = nil, canonicalTitle: String? = nil, objectName: String? = nil, descriptionHtml: String? = nil, originalDateTimeHtml: String? = nil, artistHtml: String? = nil, creditHtml: String? = nil, licenseShortName: String? = nil, licenseUrl: String? = nil) {
+              self.init(unsafeResultMap: ["__typename": "MediaWikiImage", "descriptionURL": descriptionUrl, "user": user, "size": size, "width": width, "height": height, "canonicalTitle": canonicalTitle, "objectName": objectName, "descriptionHTML": descriptionHtml, "originalDateTimeHTML": originalDateTimeHtml, "artistHTML": artistHtml, "creditHTML": creditHtml, "licenseShortName": licenseShortName, "licenseURL": licenseUrl])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            /// The URL of the wiki page describing the image.
+            public var descriptionUrl: String? {
+              get {
+                return resultMap["descriptionURL"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "descriptionURL")
+              }
+            }
+
+            /// The user who uploaded the file.
+            public var user: String? {
+              get {
+                return resultMap["user"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "user")
+              }
+            }
+
+            /// The size of the file in bytes.
+            public var size: Int? {
+              get {
+                return resultMap["size"] as? Int
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "size")
+              }
+            }
+
+            /// The pixel width of the image.
+            public var width: Int? {
+              get {
+                return resultMap["width"] as? Int
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "width")
+              }
+            }
+
+            /// The pixel height of the image.
+            public var height: Int? {
+              get {
+                return resultMap["height"] as? Int
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "height")
+              }
+            }
+
+            /// The canonical title of the file.
+            public var canonicalTitle: String? {
+              get {
+                return resultMap["canonicalTitle"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "canonicalTitle")
+              }
+            }
+
+            /// The image title, brief description, or file name.
+            public var objectName: String? {
+              get {
+                return resultMap["objectName"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "objectName")
+              }
+            }
+
+            /// A description of the image, potentially containing HTML.
+            public var descriptionHtml: String? {
+              get {
+                return resultMap["descriptionHTML"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "descriptionHTML")
+              }
+            }
+
+            /// The original date of creation of the image. May be a description rather than
+            /// a parseable timestamp, and may contain HTML.
+            public var originalDateTimeHtml: String? {
+              get {
+                return resultMap["originalDateTimeHTML"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "originalDateTimeHTML")
+              }
+            }
+
+            /// The name of the image author, potentially containing HTML.
+            public var artistHtml: String? {
+              get {
+                return resultMap["artistHTML"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "artistHTML")
+              }
+            }
+
+            /// The source of the image, potentially containing HTML.
+            public var creditHtml: String? {
+              get {
+                return resultMap["creditHTML"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "creditHTML")
+              }
+            }
+
+            /// A short human-readable license name.
+            public var licenseShortName: String? {
+              get {
+                return resultMap["licenseShortName"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "licenseShortName")
+              }
+            }
+
+            /// A web address where the license is described.
+            public var licenseUrl: String? {
+              get {
+                return resultMap["licenseURL"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "licenseURL")
+              }
+            }
+          }
         }
       }
     }
@@ -250,6 +436,22 @@ public struct ArtistBasicFragment: GraphQLFragment {
       id
       name
       disambiguation
+      mediaWikiImages {
+        __typename
+        descriptionURL
+        user
+        size
+        width
+        height
+        canonicalTitle
+        objectName
+        descriptionHTML
+        originalDateTimeHTML
+        artistHTML
+        creditHTML
+        licenseShortName
+        licenseURL
+      }
     }
     """
 
@@ -261,6 +463,7 @@ public struct ArtistBasicFragment: GraphQLFragment {
       GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("disambiguation", type: .scalar(String.self)),
+      GraphQLField("mediaWikiImages", type: .nonNull(.list(.object(MediaWikiImage.selections)))),
     ]
   }
 
@@ -270,8 +473,8 @@ public struct ArtistBasicFragment: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, name: String? = nil, disambiguation: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Artist", "id": id, "name": name, "disambiguation": disambiguation])
+  public init(id: GraphQLID, name: String? = nil, disambiguation: String? = nil, mediaWikiImages: [MediaWikiImage?]) {
+    self.init(unsafeResultMap: ["__typename": "Artist", "id": id, "name": name, "disambiguation": disambiguation, "mediaWikiImages": mediaWikiImages.map { (value: MediaWikiImage?) -> ResultMap? in value.flatMap { (value: MediaWikiImage) -> ResultMap in value.resultMap } }])
   }
 
   public var __typename: String {
@@ -310,6 +513,191 @@ public struct ArtistBasicFragment: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "disambiguation")
+    }
+  }
+
+  /// Artist images found at MediaWiki URLs in the artist’s URL relationships.
+  /// Defaults to URL relationships with the type “image”.
+  /// This field is provided by the MediaWiki extension.
+  public var mediaWikiImages: [MediaWikiImage?] {
+    get {
+      return (resultMap["mediaWikiImages"] as! [ResultMap?]).map { (value: ResultMap?) -> MediaWikiImage? in value.flatMap { (value: ResultMap) -> MediaWikiImage in MediaWikiImage(unsafeResultMap: value) } }
+    }
+    set {
+      resultMap.updateValue(newValue.map { (value: MediaWikiImage?) -> ResultMap? in value.flatMap { (value: MediaWikiImage) -> ResultMap in value.resultMap } }, forKey: "mediaWikiImages")
+    }
+  }
+
+  public struct MediaWikiImage: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["MediaWikiImage"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("descriptionURL", type: .scalar(String.self)),
+        GraphQLField("user", type: .scalar(String.self)),
+        GraphQLField("size", type: .scalar(Int.self)),
+        GraphQLField("width", type: .scalar(Int.self)),
+        GraphQLField("height", type: .scalar(Int.self)),
+        GraphQLField("canonicalTitle", type: .scalar(String.self)),
+        GraphQLField("objectName", type: .scalar(String.self)),
+        GraphQLField("descriptionHTML", type: .scalar(String.self)),
+        GraphQLField("originalDateTimeHTML", type: .scalar(String.self)),
+        GraphQLField("artistHTML", type: .scalar(String.self)),
+        GraphQLField("creditHTML", type: .scalar(String.self)),
+        GraphQLField("licenseShortName", type: .scalar(String.self)),
+        GraphQLField("licenseURL", type: .scalar(String.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(descriptionUrl: String? = nil, user: String? = nil, size: Int? = nil, width: Int? = nil, height: Int? = nil, canonicalTitle: String? = nil, objectName: String? = nil, descriptionHtml: String? = nil, originalDateTimeHtml: String? = nil, artistHtml: String? = nil, creditHtml: String? = nil, licenseShortName: String? = nil, licenseUrl: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "MediaWikiImage", "descriptionURL": descriptionUrl, "user": user, "size": size, "width": width, "height": height, "canonicalTitle": canonicalTitle, "objectName": objectName, "descriptionHTML": descriptionHtml, "originalDateTimeHTML": originalDateTimeHtml, "artistHTML": artistHtml, "creditHTML": creditHtml, "licenseShortName": licenseShortName, "licenseURL": licenseUrl])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    /// The URL of the wiki page describing the image.
+    public var descriptionUrl: String? {
+      get {
+        return resultMap["descriptionURL"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "descriptionURL")
+      }
+    }
+
+    /// The user who uploaded the file.
+    public var user: String? {
+      get {
+        return resultMap["user"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "user")
+      }
+    }
+
+    /// The size of the file in bytes.
+    public var size: Int? {
+      get {
+        return resultMap["size"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "size")
+      }
+    }
+
+    /// The pixel width of the image.
+    public var width: Int? {
+      get {
+        return resultMap["width"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "width")
+      }
+    }
+
+    /// The pixel height of the image.
+    public var height: Int? {
+      get {
+        return resultMap["height"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "height")
+      }
+    }
+
+    /// The canonical title of the file.
+    public var canonicalTitle: String? {
+      get {
+        return resultMap["canonicalTitle"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "canonicalTitle")
+      }
+    }
+
+    /// The image title, brief description, or file name.
+    public var objectName: String? {
+      get {
+        return resultMap["objectName"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "objectName")
+      }
+    }
+
+    /// A description of the image, potentially containing HTML.
+    public var descriptionHtml: String? {
+      get {
+        return resultMap["descriptionHTML"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "descriptionHTML")
+      }
+    }
+
+    /// The original date of creation of the image. May be a description rather than
+    /// a parseable timestamp, and may contain HTML.
+    public var originalDateTimeHtml: String? {
+      get {
+        return resultMap["originalDateTimeHTML"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "originalDateTimeHTML")
+      }
+    }
+
+    /// The name of the image author, potentially containing HTML.
+    public var artistHtml: String? {
+      get {
+        return resultMap["artistHTML"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "artistHTML")
+      }
+    }
+
+    /// The source of the image, potentially containing HTML.
+    public var creditHtml: String? {
+      get {
+        return resultMap["creditHTML"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "creditHTML")
+      }
+    }
+
+    /// A short human-readable license name.
+    public var licenseShortName: String? {
+      get {
+        return resultMap["licenseShortName"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "licenseShortName")
+      }
+    }
+
+    /// A web address where the license is described.
+    public var licenseUrl: String? {
+      get {
+        return resultMap["licenseURL"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "licenseURL")
+      }
     }
   }
 }

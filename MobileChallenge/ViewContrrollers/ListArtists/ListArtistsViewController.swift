@@ -86,6 +86,9 @@ extension ListArtistsViewController: UITableViewDelegate{
             detailsVC.arstistsId = selectedArtist.id
             detailsVC.artistsName = selectedArtist.name
             detailsVC.artistDisambiguation = selectedArtist.disambiguation
+            selectedArtist.mediaWikiImages.forEach { (wikiImage) in
+                detailsVC.imageUrl = wikiImage?.descriptionUrl
+            }
             navigationController?.pushViewController(detailsVC, animated: true)
         }
     }

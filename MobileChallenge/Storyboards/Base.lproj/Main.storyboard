@@ -239,16 +239,27 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lBM-qi-jPo">
+                                <rect key="frame" x="81" y="566" width="240" height="190"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="jzf-LS-hHa"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b2b-m5-Vw9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="lBM-qi-jPo" firstAttribute="leading" secondItem="b2b-m5-Vw9" secondAttribute="leading" constant="81" id="1jU-T7-Gn7"/>
+                            <constraint firstItem="b2b-m5-Vw9" firstAttribute="bottom" secondItem="lBM-qi-jPo" secondAttribute="bottom" constant="106" id="3zW-sU-fUi"/>
                             <constraint firstItem="b2b-m5-Vw9" firstAttribute="bottom" secondItem="oBt-0e-q8O" secondAttribute="bottom" constant="399" id="EHe-OJ-tEd"/>
+                            <constraint firstItem="lBM-qi-jPo" firstAttribute="top" secondItem="oBt-0e-q8O" secondAttribute="bottom" constant="103" id="IZI-NS-FU9"/>
+                            <constraint firstItem="b2b-m5-Vw9" firstAttribute="trailing" secondItem="lBM-qi-jPo" secondAttribute="trailing" constant="93" id="MTI-Zm-P07"/>
                             <constraint firstItem="oBt-0e-q8O" firstAttribute="leading" secondItem="b2b-m5-Vw9" secondAttribute="leading" constant="114" id="U8h-uq-RpI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="S1D-Ma-15H"/>
                     <connections>
+                        <outlet property="artistImage" destination="lBM-qi-jPo" id="0U8-BP-paa"/>
                         <outlet property="artistName" destination="7kG-gm-nLP" id="cJV-st-Uq1"/>
                         <outlet property="artistStatusButton" destination="oBt-0e-q8O" id="JGz-qF-u3O"/>
                     </connections>
