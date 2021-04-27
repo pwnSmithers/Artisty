@@ -14,11 +14,13 @@ class ListArtistsViewController: UIViewController {
     //MARK:- Properties
     var artists: ArtistsCollection = []
     let viewModel = ListArtistsViewModel()
+    var searchTerm = ""
     
     //MARK:- Outlets
     @IBOutlet weak var listArtistsTableView: UITableView!
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK:- View Lifecycle.
     override func viewDidLoad() {
@@ -31,21 +33,34 @@ class ListArtistsViewController: UIViewController {
         self.listArtistsTableView.delegate = self
         self.listArtistsTableView.dataSource = self
         self.searchBar.delegate = self
+        activityIndicator.isHidden = true
         if artists.isEmpty{
             listArtistsTableView.isHidden = true
         }
     }
 
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        spinner.startAnimating()
+        return footerView
+    }
 }
 
 //MARK:- Fetch artists
 extension ListArtistsViewController{
     private func searchFor(artist name: String, with viewModel: ListArtistsViewModel) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         viewModel.fetchArtists(name)
         viewModel.didSearchForArtist = {[weak self] (result) in
+            
             guard let strongSelf = self else {
                 return
             }
+            strongSelf.activityIndicator.isHidden = true
+            strongSelf.activityIndicator.stopAnimating()
             switch result {
             case .success(let artistData):
                 artistData.forEach { (artist) in
@@ -106,10 +121,12 @@ extension ListArtistsViewController: UISearchBarDelegate{
         //remove any previously searched data.
         if !self.artists.isEmpty{
             self.artists.removeAll()
+            self.listArtistsTableView.reloadData()
         }
 
         if searchBar.text != ""{
             if let searchText = searchBar.text{
+                searchTerm = searchText
                 searchBar.resignFirstResponder()
                 searchFor(artist: searchText, with: viewModel)
             }
@@ -122,3 +139,40 @@ extension ListArtistsViewController: UISearchBarDelegate{
 
 }
 
+
+extension ListArtistsViewController: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (listArtistsTableView.contentSize.height - 100 - scrollView.frame.size.height) {
+            //make sure it isn't already paginating.
+            if viewModel.isPaginatting == false {
+                self.listArtistsTableView.tableFooterView = createSpinnerFooter()
+                loadMore()
+            }
+        }
+    }
+    
+    fileprivate func loadMore(){
+        let lastArtist = self.artists.last
+        viewModel.fetchMoreArtists(lastName: searchTerm, searchName: lastArtist?.name ?? "")
+        viewModel.didSearchForArtist = {[weak self] (result) in
+            DispatchQueue.main.async {
+                self?.listArtistsTableView.tableFooterView = nil
+            }
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let artistData):
+                artistData.forEach { (artist) in
+                    if let artistR = artist{
+                        strongSelf.artists.append(artistR)
+                    }
+                }
+                strongSelf.listArtistsTableView.reloadData()
+            case .failure(let error):
+                print("Fouund an error \(error)")
+            }
+        }
+    }
+}

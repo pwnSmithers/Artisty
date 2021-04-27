@@ -172,6 +172,13 @@
                                 <color key="textColor" red="0.5254938602" green="0.52548360819999995" blue="0.52549052240000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="highlightedColor" red="0.5254938602" green="0.52548360819999995" blue="0.52549052240000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="3j7-06-66K">
+                                <rect key="frame" x="197" y="381" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="BWL-cy-ZUo"/>
+                                    <constraint firstAttribute="width" constant="20" id="Oke-32-Mbb"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oe8-sS-mkt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -182,9 +189,11 @@
                             <constraint firstItem="XoS-bE-NWr" firstAttribute="leading" secondItem="oe8-sS-mkt" secondAttribute="leading" id="E54-Ii-MiY"/>
                             <constraint firstItem="XoS-bE-NWr" firstAttribute="bottom" secondItem="oe8-sS-mkt" secondAttribute="bottom" id="aem-Br-E58"/>
                             <constraint firstItem="XoS-bE-NWr" firstAttribute="trailing" secondItem="oe8-sS-mkt" secondAttribute="trailing" id="apT-pS-Igp"/>
+                            <constraint firstItem="3j7-06-66K" firstAttribute="centerX" secondItem="f6d-Hf-hbZ" secondAttribute="centerX" id="dBq-fV-BHu"/>
                             <constraint firstItem="pnX-5l-v5h" firstAttribute="leading" secondItem="oe8-sS-mkt" secondAttribute="leading" id="dxC-Yq-LCv"/>
                             <constraint firstItem="pnX-5l-v5h" firstAttribute="top" secondItem="oe8-sS-mkt" secondAttribute="top" constant="2" id="eYh-OL-Snd"/>
                             <constraint firstItem="pnX-5l-v5h" firstAttribute="trailing" secondItem="oe8-sS-mkt" secondAttribute="trailing" id="gFj-nK-eow"/>
+                            <constraint firstItem="f6d-Hf-hbZ" firstAttribute="top" secondItem="3j7-06-66K" secondAttribute="bottom" constant="26.5" id="soV-BX-ACs"/>
                             <constraint firstItem="oe8-sS-mkt" firstAttribute="trailing" secondItem="f6d-Hf-hbZ" secondAttribute="trailing" constant="20" id="sxg-Ty-1vv"/>
                         </constraints>
                     </view>
@@ -193,6 +202,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Artists" id="wuP-mO-N0A"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="3j7-06-66K" id="d9i-TQ-1QA"/>
                         <outlet property="listArtistsTableView" destination="XoS-bE-NWr" id="dSZ-9n-5pf"/>
                         <outlet property="noContentLabel" destination="f6d-Hf-hbZ" id="Ng1-Py-ylh"/>
                         <outlet property="searchBar" destination="pnX-5l-v5h" id="0kD-xh-Hp6"/>
